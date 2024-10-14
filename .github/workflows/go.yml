@@ -30,8 +30,8 @@ jobs:
         #   CGO_ENABLED: 0
         run: |
           go mod tidy
-          GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-w -s" -v
-          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags="-w -s" -v
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-s' -o ./socks5
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-s' -o ./socks5.exe
           tree
     
           
