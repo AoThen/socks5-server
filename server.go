@@ -48,13 +48,13 @@ func main() {
 	}
 
 	// Set IP whitelist
-	if len(cfg.AllowedIPs) > 0 {
-		whitelist := make([]net.IP, len(cfg.AllowedIPs))
-		for i, ip := range cfg.AllowedIPs {
-			whitelist[i] = net.ParseIP(ip)
-		}
-		server.SetIPWhitelist(whitelist)
-	}
+	// if len(cfg.AllowedIPs) > 0 {
+	// 	whitelist := make([]net.IP, len(cfg.AllowedIPs))
+	// 	for i, ip := range cfg.AllowedIPs {
+	// 		whitelist[i] = net.ParseIP(ip)
+	// 	}
+	// 	server.SetIPWhitelist(whitelist)
+	// }
 
 	log.Printf("Start listening proxy service on port %s\n", cfg.Port)
 	if err := server.ListenAndServe("tcp", ":"+cfg.Port); err != nil {
