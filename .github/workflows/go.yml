@@ -1,0 +1,52 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Set up Go
+        uses: actions/setup-go@main
+        with:
+          go-version: 1.21
+
+      # - name: Build
+      #   run: |
+      #     go mod tidy
+      #     go build -v ./...
+
+      - name: Build socks5
+        working-directory: .
+        # env:
+        #   CGO_ENABLED: 0
+        run: |
+          go mod tidy
+          GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-w -s" -v
+          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags="-w -s" -v
+          tree
+    
+          
+        # - name: Build
+        #   run: |
+        #     sudo apt-get update -y
+        #     sudo apt-get install make  -y
+        #     sudo apt-get install iptables -y
+        #     make
+            
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: socks5
+          path: socks5*
+
+      - name: Test
+        run: go test -v ./...

@@ -3,12 +3,7 @@ env:
   DOCKERHUB_REPOSITORY: serjs/go-socks5-proxy
 
 on:
-  pull_request:
-    branches: master
-  push:
-    branches: master
-  release:
-    types: [published, edited]
+  workflow_dispatch:
 
 jobs:
   hadolint:
