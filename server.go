@@ -13,7 +13,7 @@ type params struct {
 	Password        string    `env:"PROXY_PASSWORD" envDefault:""`
 	Port            string    `env:"PROXY_PORT" envDefault:"1080"`
 	AllowedDestFqdn string    `env:"ALLOWED_DEST_FQDN" envDefault:""`
-	AllowedIPs      []string  `env:"ALLOWED_IPS" envSeparator:"," envDefault:""`
+	// AllowedIPs      []string  `env:"ALLOWED_IPS" envSeparator:"," envDefault:""`
 }
 
 func main() {
